@@ -1,0 +1,226 @@
+<title>美容サロン 伸びたリール解剖</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: 縦一列の読み物。結論 → 9店の比較(表+対数チャート) → 1本ずつの解剖 → 伸びない例 → 型 → 真似の手順 */
+:root{
+  --bg:#f7f6f3; --surface:#ffffff; --ink:#1f2128; --muted:#5f6370; --line:#e2e0da;
+  --ai:#5b4a8a;        /* 藤色 */
+  --karashi:#c9921e;
+  --warn:#b4432f; --warn-bg:#fbede9;
+  --gray-bg:#efeeea;
+  --f-display:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-num:"Noto Sans JP","Hiragino Sans",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131614; --surface:#1b1f1d; --ink:#e8eae6; --muted:#9da39f; --line:#2d3330;
+  --ai:#b3a3e0; --karashi:#e2b54e; --warn:#f08a74; --warn-bg:#3a2420; --gray-bg:#222724; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131614; --surface:#1b1f1d; --ink:#e8eae6; --muted:#9da39f; --line:#2d3330;
+  --ai:#b3a3e0; --karashi:#e2b54e; --warn:#f08a74; --warn-bg:#3a2420; --gray-bg:#222724; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:56px}
+h1,h2{font-family:var(--f-display);font-weight:900;text-wrap:balance;line-height:1.35;margin:0}
+h1{font-size:clamp(28px,5vw,40px)}
+h2{font-size:22px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+h2 small{font-family:var(--f-num);font-size:13px;color:var(--ai);letter-spacing:.08em}
+h3{font-size:18px;font-weight:700;margin:0;line-height:1.5}
+p{margin:0}
+.eyebrow{font-family:var(--f-num);font-size:13px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.lede{color:var(--muted);max-width:62ch}
+section{display:flex;flex-direction:column;gap:18px}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.points{display:grid;gap:14px;counter-reset:p;padding:0;margin:0;list-style:none}
+.points li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.points li::before{counter-increment:p;content:counter(p);font-family:var(--f-display);color:var(--surface);background:var(--ai);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:15px;margin-top:2px}
+.points b{color:var(--ai)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:680px;font-size:15px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:500;color:var(--muted);font-size:13.5px}
+tr:last-child td{border-bottom:0}
+td.note{text-align:left;white-space:normal;color:var(--muted);font-size:14px;min-width:150px}
+.acct{font-family:var(--f-num);font-size:13px;color:var(--muted)}
+.chip{display:inline-block;font-size:12.5px;padding:1px 8px;border-radius:99px;border:1px solid currentColor;line-height:1.6}
+.chip.warn{color:var(--warn)} .chip.ok{color:var(--ai)} .chip.flat{color:var(--muted)}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto}
+.chart svg{display:block;width:100%;min-width:520px;height:auto}
+.caption{font-size:14px;color:var(--muted)}
+.reels{display:grid;gap:16px}
+.reel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:grid;gap:12px}
+.reel.special{border-color:var(--warn);background:var(--warn-bg)}
+.reel.flat{background:var(--gray-bg)}
+.reel-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+.meta{font-family:var(--f-num);font-size:13.5px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;border-block:1px dashed var(--line);padding-block:10px}
+.stat{display:flex;flex-direction:column;min-width:0}
+.stat span{font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+.stat strong{font-family:var(--f-num);font-weight:500;font-size:15px}
+.stat.hl strong{color:var(--ai)}
+@media (max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.why{display:grid;gap:6px;padding-left:1.1em;margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag{font-size:13px;padding:2px 10px;border-radius:99px;background:color-mix(in srgb,var(--karashi) 18%,transparent);color:var(--ink)}
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.type{border-top:3px solid var(--ai);padding-top:10px;display:grid;gap:6px;align-content:start}
+.type .ex{font-size:14px;color:var(--muted)}
+.type.no{border-top-color:var(--muted)}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.compare div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.compare h3{font-size:15px;color:var(--muted)}
+.todo{display:grid;gap:10px;padding:0;margin:0;list-style:none}
+.todo li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.todo b{display:block}
+.method{font-size:14.5px;color:var(--muted);display:grid;gap:6px;padding-left:1.1em;margin:0}
+a{color:var(--ai)}
+a:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header style="display:grid;gap:14px">
+  <div class="eyebrow">Instagram リール調査 · 美容サロン編 · 2026年11月10日時点</div>
+  <h1>一人美容室やまつげ・眉サロンの、<br>伸びたリールを解剖する</h1>
+  <p class="lede">マンツーマン美容室、まつげ・眉毛サロン、フェイシャルエステなど、個人や小さなチームで営む美容サロン9つのアカウントを調べました。各サロンの「いつもの再生数」から大きく跳ねたリールを開いて、何が違ったのかを見ています。比較のため、伸びていないサロンのリールも1本入れました。</p>
+</header>
+
+<section>
+  <h2><small>SUMMARY</small>先に結論</h2>
+  <ol class="points">
+    <li><p><b>一番強かったのは「お悩みあるある」から始まるリールでした。</b>成城の一人美容室の「レイヤースタイルのお悩みあるある」は2.9万回で、フォロワー433人の67倍に届いています。「ボブに切ったら子供っぽくなった」「パーマとカラー、どっちが先?」も、各サロンで最高クラスの再生数でした。</p></li>
+    <li><p><b>ビフォーアフターと「デザインまとめ」は、保存されて長く見られます。</b>眉毛サロンのビフォーアフターは4.9万回で、2年以上前の投稿がいまも一覧の上位にあります。まつげサロンの「盛れるデザイン3つまとめ」は9万回でした。</p></li>
+    <li><p><b>仕上がりの後ろ姿だけの投稿は、ほぼ伸びません。</b>カラーの仕上がりを映しただけのリールは232回で、いつもとほぼ同じでした。変化の前後や、悩みの言葉がないと、知らない人が止まる理由がありません。</p></li>
+  </ol>
+</section>
+
+<section>
+  <h2><small>OVERVIEW</small>9サロンの比較</h2>
+  <p class="lede">「いつもの再生数」は、リール一覧の直近12本の中央値です。「跳ね幅」は最高再生数がその何倍か、「フォロワー比」は最高再生数がフォロワー数の何倍かを表します。</p>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>サロン</th><th>フォロワー</th><th>いつもの再生数</th><th>最高再生数</th><th>跳ね幅</th><th>フォロワー比</th><th>メモ</th></tr></thead>
+    <tbody id="acct-rows"></tbody>
+  </table>
+  </div>
+  <div class="chart" role="img" aria-label="サロン別、最高再生数がいつもの何倍だったか(対数目盛)">
+    <svg id="mult" viewBox="0 0 640 360"></svg>
+  </div>
+  <p class="caption">横軸は対数目盛です(1倍、10倍、100倍が等間隔)。濃い色の棒は、跳ね幅が5倍以上のサロンです。syneは毎回数万回届く「いつもが高い」サロンなので、跳ね幅は小さく出ています。</p>
+</section>
+
+<section>
+  <h2><small>CASES</small>伸びたリール、一本ずつ</h2>
+  <p class="lede">美容サロンは、いいね数を非表示にしている投稿が多く、いいね率はほとんど計算できませんでした。そのぶん、テロップとキャプションの中身を中心に見ています。</p>
+  <div class="reels" id="reels"></div>
+</section>
+
+<section>
+  <h2><small>PATTERNS</small>美容サロンで伸びた「型」</h2>
+  <div class="types">
+    <div class="type"><h3>お悩みあるあるで始める</h3><p>「毛先がスカスカになりそう」「ボブにしたら子供っぽくなった」など、お客さんが口にする不安をそのままテロップにする。当てはまる人が最後まで見ます。</p><p class="ex">Rewards 2.9万回 / うめつたいが 1万回</p></div>
+    <div class="type"><h3>よくある質問に、プロとして答える</h3><p>「パーマとカラー、どっちが先?」のように、答えを知りたくなる問いを最初に出し、施術の様子に答えを重ねる。</p><p class="ex">ulura hair 1.3万回(投稿2日目)</p></div>
+    <div class="type"><h3>ビフォーアフター</h3><p>眉やまつげは、変化が一目でわかるジャンル。施術前後を並べるだけで、技術が伝わります。</p><p class="ex">フリルナチュール 4.9万回</p></div>
+    <div class="type"><h3>保存したくなる「まとめ」</h3><p>人気のデザインを3つ並べて「保存して参考にしてね」と添える。予約前に見返すために保存され、長く再生されます。</p><p class="ex">syne 9万回</p></div>
+    <div class="type no"><h3>伸びない型: 仕上がりだけ</h3><p>完成した髪型の後ろ姿や、仕上がり写真だけのリール。サロンの記録にはなっても、知らない人が見る理由になりにくい。</p><p class="ex">SLOW 232回(いつもとほぼ同じ)</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><small>VS NAIL</small>ネイルサロンとの違い</h2>
+  <div class="compare">
+    <div><h3>ネイルサロン</h3><p>大きく跳ねたリールの多くが、地域名と価格を前面に出した宣伝型。いいね率もかなり低く、有料配信の可能性が高かった。</p></div>
+    <div><h3>美容サロン(髪・まつげ・眉)</h3><p>お悩み、質問への答え、ビフォーアフターなど「役に立つ内容」で跳ねたリールが多い。髪や顔は変化が大きく、悩みも言葉にしやすいため、自然に伸びる余地が大きい。</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><small>NEXT STEP</small>明日から真似するなら</h2>
+  <ul class="todo">
+    <li><b>① お客さんによく言われる不安を、3つ書き出す</b>カウンセリングで聞く「〜が心配」「〜になりがち」が、そのままテロップのネタになります。</li>
+    <li><b>② 1本目は「〇〇のお悩みあるある」から始める</b>チェックリスト形式にして、「一つでも当てはまったらご相談ください」で締めます。</li>
+    <li><b>③ 施術前の写真を撮らせてもらう</b>ビフォーアフターは一番説明がいらない投稿です。お客さんの許可を取り、顔を隠す工夫もしておきます。</li>
+    <li><b>④ 仕上がりだけの投稿には、悩みの一言を足す</b>「くせ毛を生かしてスタイリングを楽に」など、変化の理由を1枚目に書きます。</li>
+  </ul>
+</section>
+
+<section>
+  <h2><small>METHOD</small>調べ方と、わかっていないこと</h2>
+  <ul class="method">
+    <li>Instagramの検索(マンツーマン美容室、プライベートサロン 美容室、まつパ、アイブロウ サロン、エステ 個人サロンなど)から候補を選び、Chromeでプロフィールを開いて再生数を読み取りました。全国から無作為に選んだわけではないので、偏りがあります。</li>
+    <li>syne(原宿)とフリルナチュール(フォロワー3万人)は、スタッフが複数いる小規模チェーンに近いサロンです。</li>
+    <li>いいね数を非表示にしている投稿が多く、いいね率はほとんど取れていません。<b>広告として配信されたかどうかも、画面からはわかりません。</b></li>
+    <li>投稿日は、リールのIDから計算した日付です。</li>
+  </ul>
+</section>
+
+</div>
+
+<script>
+const accts=[
+  {n:"Rewards hiroki",id:"hi__ro__7__",area:"東京・成城学園前",f:433,med:2368,top:29000,note:'<span class="chip ok">お悩みあるある</span>'},
+  {n:"フリルナチュール",id:"frillnature",area:"福岡ほか",f:30000,med:4003,top:49000,note:'<span class="chip ok">ビフォーアフター</span> 複数店舗'},
+  {n:"うめつたいが",id:"i.am.taiga.u",area:"東京・池袋",f:8535,med:2214,top:10000,note:'<span class="chip ok">お悩みあるある</span>'},
+  {n:"ulura hair",id:"ulura_hair_yoko",area:"神奈川・綱島",f:1819,med:4701,top:13000,note:'<span class="chip ok">質問に答える</span>'},
+  {n:"syne",id:"syne_eyelash",area:"東京・原宿",f:3840,med:39500,top:90000,note:'<span class="chip ok">デザインまとめ</span> いつもが高い'},
+  {n:"saseyuka",id:"saseyuka.mokusu",area:"千葉・八街",f:1004,med:756,top:1986,note:'<span class="chip flat">小さな跳ね</span> 交流会の動画'},
+  {n:"chiyomi",id:"chiyomi.byfleurtokyo",area:"東京・自由が丘",f:1590,med:2322,top:5247,note:'<span class="chip ok">共同投稿</span>'},
+  {n:"kaede",id:"_kaeppp",area:"佐賀",f:911,med:1636,top:2157,note:'<span class="chip flat">安定型</span> 毎回1.5千前後'},
+  {n:"SLOW",id:"slow_privatesalon",area:"滋賀・草津",f:117,med:212,top:232,note:'<span class="chip flat">大きな跳ねなし</span>'}
+];
+const reels=[
+  {cls:"",t:"「レイヤースタイルのお悩みあるある」",a:"Rewards hiroki",d:"2026年8月3日",url:"https://www.instagram.com/hi__ro__7__/reel/Dbk8HTxzsX8/",v:"2.9万",l:"非表示",lr:"—",fr:"67倍",
+   why:["モデルが手で「不安」を表すしぐさに、お悩みのテロップを重ねている。","キャプションは「毛先がスカスカになりそうで怖い」「思ったより切られそうで不安」など6つのチェックリスト。最後に「一つでも当てはまったらご相談ください」。","フォロワー433人に対して2.9万回。今回の美容サロンで一番フォロワー比が高い。"],tags:["お悩みあるある","チェックリスト"]},
+  {cls:"",t:"「ボブに切ったら、なんか子供っぽくなった」",a:"うめつたいが",d:"2026年10月6日",url:"https://www.instagram.com/i.am.taiga.u/reel/DeJmGeCBiSI/",v:"1万",l:"非表示",lr:"—",fr:"1.2倍",
+   why:["失敗談のような一言で始まり、「それにはちゃんと原因があります」と続く。","髪を結んで見せながら「結んでも小顔効果抜群な顔まわりカット」とテロップ。","「保存してカウンセリングの際お使いください」と、保存する理由まで書いている。"],tags:["お悩みあるある","保存"]},
+  {cls:"",t:"「パーマとカラー、どっちが先?」",a:"ulura hair",d:"2026年11月8日",url:"https://www.instagram.com/ulura_hair_yoko/reel/DfeGhXLC19L/",v:"1.3万",l:"非表示",lr:"—",fr:"7.1倍",
+   why:["お客さんがよく迷う質問をそのまま1枚目に。答えは「先にパーマ、その約1週間後以降にカラー」。","施術中の様子に、答えのテロップを順番に重ねている。","投稿2日目で1.3万回。このサロンで一番の再生数になっている。"],tags:["質問に答える","施術の様子"]},
+  {cls:"",t:"高校卒業前に、眉とまつげのビフォーアフター",a:"フリルナチュール",d:"2024年3月13日",url:"https://www.instagram.com/frillnature/reel/C4c0YoWPX1S/",v:"4.9万",l:"非表示",lr:"—",fr:"1.6倍",
+   why:["施術の前後を並べて、変化を一目で見せている。","キャプションは「お悩み」「デザイン・ご提案」の順に、お客さんの状況と提案内容を書いたカルテのような形。","2年以上前の投稿だが、一覧の上位に固定され、いまも見られ続けている。"],tags:["ビフォーアフター","カルテ型"]},
+  {cls:"",t:"「大人気マツエクデザインまとめ」",a:"syne",d:"2026年5月24日",url:"https://www.instagram.com/syne_eyelash/reel/DYtGj2RydVt/",v:"9万",l:"非表示",lr:"—",fr:"23倍",
+   why:["盛れるデザインを3つまとめ、「デザインに悩んでる方保存して参考にしてみてください」と添えている。","音源はIVEの流行り曲。","このサロンは毎回数万回届いていて、スタッフのアカウントもキャプションに並べている。なお、求人のリールも7.5万回あるが、いいねがかなり少なく、宣伝の可能性がある。"],tags:["デザインまとめ","保存","流行りの曲"]},
+  {cls:"",t:"「この9枚の私の共通点わかりますか?」",a:"chiyomi",d:"2026年1月14日",url:"https://www.instagram.com/chiyomi.byfleurtokyo/reel/DTfYYRUAVyZ/",v:"5,247",l:"50",lr:"1.0%",fr:"3.3倍",
+   why:["他の2アカウントとの共同投稿。セルフホワイトニングの体験レポ。","9枚の写真を並べて「共通点わかりますか?」と問いかける、クイズ形式の始まり方。","投稿には「AIコンテンツ」のラベルが付いている。"],tags:["共同投稿","クイズ"]}
+];
+const special=null;
+const flat={cls:"flat",t:"推しのアーティストに寄せた、red orange のカラー",a:"SLOW",d:"2026年11月3日",url:"https://www.instagram.com/slow_privatesalon/reel/DfRI5XVPghZ/",v:"232",l:"—",lr:"—",fr:"2.0倍",
+   why:["カラーとパーマの仕上がりの後ろ姿を映したリール。","「推しのアーティストの髪色に近づくように」という良いエピソードはキャプションの中にあり、動画の1枚目には出ていない。","いつもの再生数は約210回。「推しの髪色にしたい人へ」と1枚目に書くだけで、止まる人は増えるはず。"],tags:[]};
+const fmtN=v=>v>=10000?(Math.round(v/1000)/10)+'万':v.toLocaleString('ja-JP');
+document.getElementById('acct-rows').innerHTML=accts.map(a=>{
+  const m=a.top/a.med, fr=a.top/a.f;
+  const r=v=>v>=10?Math.round(v):Math.round(v*10)/10;
+  return `<tr><td>${a.n}<br><span class="acct">@${a.id} · ${a.area}</span></td><td class="num">${fmtN(a.f)}</td><td class="num">約${fmtN(a.med)}</td><td class="num">${fmtN(a.top)}</td><td class="num"><b>${r(m)}倍</b></td><td class="num">${r(fr)}倍</td><td class="note">${a.note}</td></tr>`}).join('');
+
+(function(){
+  const svg=document.getElementById('mult'), ns='http://www.w3.org/2000/svg';
+  const data=accts.map(a=>({n:a.n,m:a.top/a.med,id:a.id})).sort((a,b)=>b.m-a.m);
+  const L=170,R=600,T=20,rowH=34,hi=Math.log10(200);
+  const x=v=>L+Math.log10(v)/hi*(R-L);
+  const el=(t,at,txt)=>{const e=document.createElementNS(ns,t);for(const k in at)e.setAttribute(k,at[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
+  const H=T+data.length*rowH+30; svg.setAttribute('viewBox',`0 0 640 ${H}`);
+  [1,2,5,10,20,50,100,200].forEach(t=>{
+    el('line',{x1:x(t),x2:x(t),y1:T-6,y2:T+data.length*rowH,stroke:'var(--line)','stroke-width':t===1||t===10||t===100?1.2:.6});
+    el('text',{x:x(t),y:T+data.length*rowH+18,'text-anchor':'middle','font-size':12,fill:'var(--muted)','font-family':'Noto Sans JP, sans-serif'},t+'倍');
+  });
+  data.forEach((d,i)=>{
+    const y=T+i*rowH;
+    const col=d.id==='udonya_jin'?'var(--warn)':(d.m>=5?'var(--ai)':'var(--muted)');
+    el('text',{x:L-10,y:y+rowH/2+4,'text-anchor':'end','font-size':13.5,fill:'var(--ink)'},d.n);
+    el('rect',{x:L,y:y+7,width:Math.max(2,x(d.m)-L),height:rowH-14,rx:3,fill:col,opacity:d.id==='udonya_jin'?.6:.9});
+    const lbl=(d.m>=10?Math.round(d.m):d.m.toFixed(1))+'倍';
+    const inside=x(d.m)>R-40;
+    el('text',{x:inside?x(d.m)-6:x(d.m)+6,y:y+rowH/2+4,'text-anchor':inside?'end':'start','font-size':13,fill:inside?'var(--surface)':'var(--ink)','font-family':'Noto Sans JP, sans-serif'},lbl);
+  });
+})();
+
+const stat=(k,label,val,hl)=>`<div class="stat${hl?' hl':''}"><span>${label}</span><strong>${val}</strong></div>`;
+const card=r=>`<article class="reel ${r.cls}">
+  <div class="reel-head"><h3>${r.t}</h3><span class="meta">${r.a} · ${r.d}</span></div>
+  <div class="stats">${stat('v','再生',r.v)}${stat('fr','フォロワー比',r.fr,true)}${stat('l','いいね',r.l)}${stat('lr','いいね率',r.lr)}</div>
+  <ul class="why">${r.why.map(w=>`<li>${w}</li>`).join('')}</ul>
+  <div class="tags">${r.cls==='special'?'<span class="chip warn">再現できない例</span>':r.cls==='flat'?'<span class="chip flat">伸びない例</span>':r.tags.map(t=>`<span class="tag">${t}</span>`).join('')}<a href="${r.url}" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article>`;
+document.getElementById('reels').innerHTML=reels.map(card).join('')+[special,flat].filter(Boolean).map(card).join('');
+</script>
