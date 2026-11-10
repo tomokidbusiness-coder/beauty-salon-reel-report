@@ -1,12 +1,12 @@
-<title>美容サロン 伸びたリール解剖</title>
+<title>美肌サロン 伸びたリール解剖</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
 <style>
-/* Layout: 縦一列の読み物。結論 → 9店の比較(表+対数チャート) → 1本ずつの解剖 → 伸びない例 → 型 → 真似の手順 */
+/* Layout: 結論 → 数字で見る全体像 → 跳ねた上位の表 → 1本ずつの解剖 → 型 → ジャンル比較 → 真似の手順 → 調べ方 */
 :root{
   --bg:#f7f6f3; --surface:#ffffff; --ink:#1f2128; --muted:#5f6370; --line:#e2e0da;
-  --ai:#5b4a8a;        /* 藤色 */
+  --ai:#2d6a7f;
   --karashi:#c9921e;
   --warn:#b4432f; --warn-bg:#fbede9;
   --gray-bg:#efeeea;
@@ -16,10 +16,10 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#131614; --surface:#1b1f1d; --ink:#e8eae6; --muted:#9da39f; --line:#2d3330;
-  --ai:#b3a3e0; --karashi:#e2b54e; --warn:#f08a74; --warn-bg:#3a2420; --gray-bg:#222724; color-scheme:dark}}
+  --ai:#86c5d8; --karashi:#e2b54e; --warn:#f08a74; --warn-bg:#3a2420; --gray-bg:#222724; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#131614; --surface:#1b1f1d; --ink:#e8eae6; --muted:#9da39f; --line:#2d3330;
-  --ai:#b3a3e0; --karashi:#e2b54e; --warn:#f08a74; --warn-bg:#3a2420; --gray-bg:#222724; color-scheme:dark}
+  --ai:#86c5d8; --karashi:#e2b54e; --warn:#f08a74; --warn-bg:#3a2420; --gray-bg:#222724; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding-block:40px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:56px}
 h1,h2{font-family:var(--f-display);font-weight:900;text-wrap:balance;line-height:1.35;margin:0}
@@ -77,150 +77,109 @@ td.note{text-align:left;white-space:normal;color:var(--muted);font-size:14px;min
 .method{font-size:14.5px;color:var(--muted);display:grid;gap:6px;padding-left:1.1em;margin:0}
 a{color:var(--ai)}
 a:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
-</style>
 
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:2px}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.kpi strong{font-family:var(--f-num);font-size:24px;font-weight:700;color:var(--ai);line-height:1.3}
+.kpi small{font-size:12.5px;color:var(--muted)}
+@media (max-width:640px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cmp td:first-child{white-space:normal}
+.cmp tr.me td{background:color-mix(in srgb,var(--ai) 9%,transparent);font-weight:500}
+.nav{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:14px}
+</style>
 <div class="wrap">
 
 <header style="display:grid;gap:14px">
-  <div class="eyebrow">Instagram リール調査 · 美容サロン編 · 2026年11月10日時点</div>
-  <h1>一人美容室やまつげ・眉サロンの、<br>伸びたリールを解剖する</h1>
-  <p class="lede">マンツーマン美容室、まつげ・眉毛サロン、フェイシャルエステなど、個人や小さなチームで営む美容サロン9つのアカウントを調べました。各サロンの「いつもの再生数」から大きく跳ねたリールを開いて、何が違ったのかを見ています。比較のため、伸びていないサロンのリールも1本入れました。</p>
+  <nav class="nav" aria-label="ほかのジャンル"><a href="https://tomokidbusiness-coder.github.io/kojinten-reel-report/">飲食の個人店</a><a href="https://tomokidbusiness-coder.github.io/nail-reel-report/">ネイルサロン</a><span>美肌・スキンケア</span><a href="https://tomokidbusiness-coder.github.io/eyelash-reel-report/">まつ毛・眉</a></nav>
+  <div class="eyebrow">Instagram リール調査 · 美肌・スキンケアサロン編 · 2026年11月10日時点</div>
+  <h1>美肌・スキンケアサロン52店の、<br>伸びたリールを解剖する</h1>
+  <p class="lede">フェイシャルエステ、毛穴ケア、ニキビケア、ハーブピーリング、韓国肌管理、美容鍼など、肌を扱う個人サロン52店のリールを調べました。各サロンの「いつもの再生数」から大きく跳ねたリールを開いて、何が違ったのかを見ています。</p>
 </header>
 
 <section>
   <h2><small>SUMMARY</small>先に結論</h2>
-  <ol class="points">
-    <li><p><b>一番強かったのは「お悩みあるある」から始まるリールでした。</b>成城の一人美容室の「レイヤースタイルのお悩みあるある」は2.9万回で、フォロワー433人の67倍に届いています。「ボブに切ったら子供っぽくなった」「パーマとカラー、どっちが先?」も、各サロンで最高クラスの再生数でした。</p></li>
-    <li><p><b>ビフォーアフターと「デザインまとめ」は、保存されて長く見られます。</b>眉毛サロンのビフォーアフターは4.9万回で、2年以上前の投稿がいまも一覧の上位にあります。まつげサロンの「盛れるデザイン3つまとめ」は9万回でした。</p></li>
-    <li><p><b>仕上がりの後ろ姿だけの投稿は、ほぼ伸びません。</b>カラーの仕上がりを映しただけのリールは232回で、いつもとほぼ同じでした。変化の前後や、悩みの言葉がないと、知らない人が止まる理由がありません。</p></li>
-  </ol>
+  <ol class="points"><li><p><b>いつもの再生数は約728回と、4ジャンルで一番低めでした。</b>それでも52店のうち21店(4割)に、いつもの5倍以上に跳ねたリールがあります。</p></li><li><p><b>一番伸びたのは、肌の話ではありませんでした。</b>「大人のディスコという新しい遊び」の紹介が49.7万回、海外のクリエイターとの共同投稿が16.1万回。本業の外の話題や、ほかの人のフォロワーを借りる投稿が、桁違いに届いています。</p></li><li><p><b>肌の悩みを扱うリールは、宣伝型が多めでした。</b>ニキビの経過、毛穴洗浄の「1度での変化」、フェイシャルWaxなどが数万回に跳ねていますが、価格や初回割引、住所を書いた文面で、いいね率は0.1〜0.3%と低めです。</p></li></ol>
 </section>
 
-<section>
-  <h2><small>OVERVIEW</small>9サロンの比較</h2>
-  <p class="lede">「いつもの再生数」は、リール一覧の直近12本の中央値です。「跳ね幅」は最高再生数がその何倍か、「フォロワー比」は最高再生数がフォロワー数の何倍かを表します。</p>
-  <div class="tbl">
-  <table>
-    <thead><tr><th>サロン</th><th>フォロワー</th><th>いつもの再生数</th><th>最高再生数</th><th>跳ね幅</th><th>フォロワー比</th><th>メモ</th></tr></thead>
-    <tbody id="acct-rows"></tbody>
-  </table>
-  </div>
-  <div class="chart" role="img" aria-label="サロン別、最高再生数がいつもの何倍だったか(対数目盛)">
-    <svg id="mult" viewBox="0 0 640 360"></svg>
-  </div>
-  <p class="caption">横軸は対数目盛です(1倍、10倍、100倍が等間隔)。濃い色の棒は、跳ね幅が5倍以上のサロンです。syneは毎回数万回届く「いつもが高い」サロンなので、跳ね幅は小さく出ています。</p>
+<section style="display:grid;gap:16px">
+  <h2><small>NUMBERS</small>52アカウントの全体像</h2>
+  <div class="kpis">
+  <div class="kpi"><span>調べたアカウント</span><strong>52件</strong><small>リール6本以上</small></div>
+  <div class="kpi"><span>フォロワー数(中央値)</span><strong>916人</strong><small>真ん中のアカウント</small></div>
+  <div class="kpi"><span>いつもの再生数(中央値)</span><strong>728回</strong><small>直近12本の中央値</small></div>
+  <div class="kpi"><span>5倍以上に跳ねた</span><strong>40%</strong><small>21件 / 10倍以上は12件</small></div>
+</div>
+  <div class="chart"><svg viewBox="0 0 640 274" role="img" aria-label="跳ね幅ごとのアカウント数"><rect x="40" y="24.0" width="80" height="200.0" rx="3" fill="var(--muted)" opacity=".45"/><text x="80.0" y="18.0" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="Noto Sans JP, sans-serif">13件</text><text x="80.0" y="244" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Noto Sans JP, sans-serif">2倍未満</text><rect x="136" y="100.9" width="80" height="123.1" rx="3" fill="var(--muted)" opacity=".45"/><text x="176.0" y="94.9" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="Noto Sans JP, sans-serif">8件</text><text x="176.0" y="244" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Noto Sans JP, sans-serif">2〜3倍</text><rect x="232" y="70.2" width="80" height="153.8" rx="3" fill="var(--muted)" opacity=".45"/><text x="272.0" y="64.2" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="Noto Sans JP, sans-serif">10件</text><text x="272.0" y="244" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Noto Sans JP, sans-serif">3〜5倍</text><rect x="328" y="85.5" width="80" height="138.5" rx="3" fill="var(--ai)" opacity=".9"/><text x="368.0" y="79.5" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="Noto Sans JP, sans-serif">9件</text><text x="368.0" y="244" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Noto Sans JP, sans-serif">5〜10倍</text><rect x="424" y="116.3" width="80" height="107.7" rx="3" fill="var(--ai)" opacity=".9"/><text x="464.0" y="110.3" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="Noto Sans JP, sans-serif">7件</text><text x="464.0" y="244" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Noto Sans JP, sans-serif">10〜30倍</text><rect x="520" y="147.1" width="80" height="76.9" rx="3" fill="var(--ai)" opacity=".9"/><text x="560.0" y="141.1" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="Noto Sans JP, sans-serif">5件</text><text x="560.0" y="244" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Noto Sans JP, sans-serif">30倍以上</text><line x1="34" x2="606" y1="224" y2="224" stroke="var(--line)"/><text x="40" y="266" font-size="12.5" fill="var(--muted)" font-family="Noto Sans JP, sans-serif">濃い色 = いつもの5倍以上に跳ねたリールがあるアカウント</text></svg></div>
+  <p class="caption">「跳ね幅」は、直近12〜15本のリールの中で一番再生されたものが、いつもの再生数(中央値)の何倍だったかです。「30倍以上」の5店のうち2店は、肌とは関係のない話題のリールでした。</p>
 </section>
 
-<section>
+<section style="display:grid;gap:16px">
+  <h2><small>TOP 15</small>大きく跳ねたアカウント</h2>
+  <p class="lede">跳ね幅の大きい順です。最高再生数をクリックすると、そのリールが開きます。メモは、実際にリールを開いて確認した内容です。</p>
+  <div class="tbl"><table><thead><tr><th>アカウント</th><th>フォロワー</th><th>いつもの再生数</th><th>最高再生数</th><th>跳ね幅</th><th>フォロワー比</th><th>メモ</th></tr></thead><tbody><tr><td><a href="https://www.instagram.com/kogao_kie/" target="_blank" rel="noopener">@kogao_kie</a></td><td class="num">1,292</td><td class="num">約1,599</td><td class="num"><a href="https://www.instagram.com/reel/DcYpfruT9Y9/" target="_blank" rel="noopener">49.7万</a></td><td class="num"><b>311倍</b></td><td class="num">385倍</td><td class="note"><span class="chip ok">本業の外</span> 「大人のディスコ」の紹介</td></tr><tr><td><a href="https://www.instagram.com/m.k_salon.2205/" target="_blank" rel="noopener">@m.k_salon.2205</a></td><td class="num">424</td><td class="num">約803</td><td class="num"><a href="https://www.instagram.com/reel/DIOUijPTPb6/" target="_blank" rel="noopener">9.7万</a></td><td class="num"><b>121倍</b></td><td class="num">229倍</td><td class="note"><span class="chip warn">宣伝型?</span> ニキビの経過と価格。いいね率0.12%</td></tr><tr><td><a href="https://www.instagram.com/kanchome_miyabi/" target="_blank" rel="noopener">@kanchome_miyabi</a></td><td class="num">912</td><td class="num">約1,831</td><td class="num"><a href="https://www.instagram.com/reel/DRMYOTaDWVL/" target="_blank" rel="noopener">16.1万</a></td><td class="num"><b>88倍</b></td><td class="num">177倍</td><td class="note"><span class="chip ok">共同投稿</span> 海外のクリエイターと</td></tr><tr><td><a href="https://www.instagram.com/thepearls_beauty/" target="_blank" rel="noopener">@thepearls_beauty</a></td><td class="num">920</td><td class="num">約873</td><td class="num"><a href="https://www.instagram.com/reel/DZlp4KfvqHv/" target="_blank" rel="noopener">5.8万</a></td><td class="num"><b>66倍</b></td><td class="num">63倍</td><td class="note"><span class="chip warn">宣伝型?</span> フェイシャルWaxと住所</td></tr><tr><td><a href="https://www.instagram.com/lealea_shoto/" target="_blank" rel="noopener">@lealea_shoto</a></td><td class="num">1,986</td><td class="num">約820</td><td class="num"><a href="https://www.instagram.com/reel/DaRpnW0RVHc/" target="_blank" rel="noopener">3.5万</a></td><td class="num"><b>43倍</b></td><td class="num">18倍</td><td class="note"><span class="chip warn">宣伝型?</span> お悩みチェックリスト。いいね率0.3%</td></tr><tr><td><a href="https://www.instagram.com/smilesalon2525.shimi_care/" target="_blank" rel="noopener">@smilesalon2525.shimi_care</a></td><td class="num">1,132</td><td class="num">約210</td><td class="num"><a href="https://www.instagram.com/reel/C7nvfJ4NE2v/" target="_blank" rel="noopener">4,218</a></td><td class="num"><b>20倍</b></td><td class="num">3.7倍</td><td class="note"><span class="chip ok">お役立ち</span> 紫外線対策のすすめ</td></tr><tr><td><a href="https://www.instagram.com/stiare_skincare/" target="_blank" rel="noopener">@stiare_skincare</a></td><td class="num">221</td><td class="num">約828</td><td class="num"><a href="https://www.instagram.com/reel/DPN5m3oDxu4/" target="_blank" rel="noopener">1.5万</a></td><td class="num"><b>18倍</b></td><td class="num">68倍</td><td class="note"><span class="chip ok">呼びかけ</span> 「化粧品を探す時間がもったいない」</td></tr><tr><td><a href="https://www.instagram.com/kinugasa89/" target="_blank" rel="noopener">@kinugasa89</a></td><td class="num">1,878</td><td class="num">約404</td><td class="num"><a href="https://www.instagram.com/reel/CHScUC1BWtT/" target="_blank" rel="noopener">7,262</a></td><td class="num"><b>18倍</b></td><td class="num">3.9倍</td><td class="note"><span class="chip flat">未確認</span></td></tr><tr><td><a href="https://www.instagram.com/saori.keana/" target="_blank" rel="noopener">@saori.keana</a></td><td class="num">1,187</td><td class="num">約1,755</td><td class="num"><a href="https://www.instagram.com/reel/DbMW4ipzA-j/" target="_blank" rel="noopener">3万</a></td><td class="num"><b>17倍</b></td><td class="num">25倍</td><td class="note"><span class="chip warn">宣伝型?</span> 毛穴洗浄と初回価格</td></tr><tr><td><a href="https://www.instagram.com/pola_chiba_facialbody/" target="_blank" rel="noopener">@pola_chiba_facialbody</a></td><td class="num">493</td><td class="num">約193</td><td class="num"><a href="https://www.instagram.com/reel/DVxGNlOErPk/" target="_blank" rel="noopener">3,276</a></td><td class="num"><b>17倍</b></td><td class="num">6.6倍</td><td class="note"><span class="chip ok">季節の呼びかけ</span> 卒園・卒業前に</td></tr><tr><td><a href="https://www.instagram.com/unelimit_hana/" target="_blank" rel="noopener">@unelimit_hana</a></td><td class="num">218</td><td class="num">約594</td><td class="num"><a href="https://www.instagram.com/reel/Dc8YR5GTPw6/" target="_blank" rel="noopener">7,781</a></td><td class="num"><b>13倍</b></td><td class="num">36倍</td><td class="note"><span class="chip ok">共同投稿</span> 「お肌って本当に変わるのかな?」</td></tr><tr><td><a href="https://www.instagram.com/nikibi_plance_ebisu_shibuya/" target="_blank" rel="noopener">@nikibi_plance_ebisu_shibuya</a></td><td class="num">656</td><td class="num">約676</td><td class="num"><a href="https://www.instagram.com/reel/DefmlunT7qZ/" target="_blank" rel="noopener">7,954</a></td><td class="num"><b>12倍</b></td><td class="num">12倍</td><td class="note"><span class="chip ok">新メニュー</span> 韓国肌管理スタート</td></tr><tr><td><a href="https://www.instagram.com/katakori_shibuya/" target="_blank" rel="noopener">@katakori_shibuya</a></td><td class="num">419</td><td class="num">約494</td><td class="num"><a href="https://www.instagram.com/reel/DCG4hkHyAz2/" target="_blank" rel="noopener">4,188</a></td><td class="num"><b>8.5倍</b></td><td class="num">10.0倍</td><td class="note"></td></tr><tr><td><a href="https://www.instagram.com/shereek1101/" target="_blank" rel="noopener">@shereek1101</a></td><td class="num">739</td><td class="num">約212</td><td class="num"><a href="https://www.instagram.com/reel/DccjGvEPlUw/" target="_blank" rel="noopener">1,733</a></td><td class="num"><b>8.2倍</b></td><td class="num">2.3倍</td><td class="note"></td></tr><tr><td><a href="https://www.instagram.com/yuka_louise/" target="_blank" rel="noopener">@yuka_louise</a></td><td class="num">1,829</td><td class="num">約1,840</td><td class="num"><a href="https://www.instagram.com/reel/DYUMxR0pNBB/" target="_blank" rel="noopener">1.3万</a></td><td class="num"><b>7.1倍</b></td><td class="num">7.1倍</td><td class="note"></td></tr></tbody></table></div>
+</section>
+
+<section style="display:grid;gap:16px">
   <h2><small>CASES</small>伸びたリール、一本ずつ</h2>
-  <p class="lede">美容サロンは、いいね数を非表示にしている投稿が多く、いいね率はほとんど計算できませんでした。そのぶん、テロップとキャプションの中身を中心に見ています。</p>
-  <div class="reels" id="reels"></div>
+  <p class="lede">美肌サロンは、いいね数を非表示にしている投稿が多く、いいね率が出せないものもありました。そのぶん、キャプションの中身を中心に見ています。</p>
+  <div class="reels"><article class="reel ">
+  <div class="reel-head"><h3>「大人のディスコ」という新しい遊び</h3><span class="meta">@kogao_kie · 2026年8月23日</span></div>
+  <div class="stats"><div class="stat"><span>再生</span><strong>49.7万</strong></div><div class="stat hl"><span>いつもの何倍</span><strong>311倍</strong></div><div class="stat"><span>いいね</span><strong>2,668</strong></div><div class="stat"><span>いいね率</span><strong>0.54%</strong></div></div>
+  <ul class="why"><li>小顔・たるみケアのサロンが、最近見つけた「大人のディスコ」というイベントを紹介したリール。</li><li>主催者のアカウントを2回書き、「詳しく知りたい方は〇〇さんまで」と送り先を作っている。</li><li>フォロワー1,292人で49.7万回、いいね率0.54%。肌の話ではないが、サロンを知ってもらう入口になっている。</li></ul>
+  <div class="tags"><span class="tag">本業の外</span><span class="tag">ほかの人を紹介</span><a href="https://www.instagram.com/reel/DcYpfruT9Y9/" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article><article class="reel ">
+  <div class="reel-head"><h3>海外のクリエイターとの共同投稿</h3><span class="meta">@kanchome_miyabi · 2025年11月18日</span></div>
+  <div class="stats"><div class="stat"><span>再生</span><strong>16.1万</strong></div><div class="stat hl"><span>いつもの何倍</span><strong>88倍</strong></div><div class="stat"><span>いいね</span><strong>935</strong></div><div class="stat"><span>いいね率</span><strong>0.58%</strong></div></div>
+  <ul class="why"><li>海外のクリエイターが「日本で頭のスペシャルケアを受けた」という英語のリールに、サロンが共同投稿者として入っている。</li><li>相手のフォロワー(海外の人)に届くので、日本語だけの投稿とは届く先がまったく違う。</li><li>いつもの約1,800回から16.1万回へ、88倍。</li></ul>
+  <div class="tags"><span class="tag">共同投稿</span><span class="tag">海外向け</span><a href="https://www.instagram.com/reel/DRMYOTaDWVL/" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article><article class="reel special">
+  <div class="reel-head"><h3>ニキビに悩むお客様の経過 + 価格表</h3><span class="meta">@m.k_salon.2205 · 2025年4月9日</span></div>
+  <div class="stats"><div class="stat"><span>再生</span><strong>9.7万</strong></div><div class="stat hl"><span>いつもの何倍</span><strong>121倍</strong></div><div class="stat"><span>いいね</span><strong>120</strong></div><div class="stat"><span>いいね率</span><strong>0.12%</strong></div></div>
+  <ul class="why"><li>毎週通うお客様の、ニキビの赤みが減っていく経過を見せている。</li><li>キャプションの後半はハーブピーリングの価格表と、駅からの距離。</li><li>9.7万回に対していいね率0.12%。中身は強いが、届け方は広告の可能性が高い。</li></ul>
+  <div class="tags"><span class="chip warn">宣伝型の可能性</span><span class="tag">ビフォーアフター</span><span class="tag">価格</span><a href="https://www.instagram.com/reel/DIOUijPTPb6/" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article><article class="reel special">
+  <div class="reel-head"><h3>「実はこの毛穴ケアって、、、1度での変化なんです！」</h3><span class="meta">@saori.keana · 2026年7月25日</span></div>
+  <div class="stats"><div class="stat"><span>再生</span><strong>3万</strong></div><div class="stat hl"><span>いつもの何倍</span><strong>17倍</strong></div><div class="stat"><span>いいね</span><strong>非表示</strong></div><div class="stat"><span>いいね率</span><strong>—</strong></div></div>
+  <ul class="why"><li>「洗顔やクレンジング、ピーリングでは取れなかった毛穴の黒ずみが、ごっそり」と、変化をはっきり言葉にしている。</li><li>「国立市近郊にお住まいの毛穴に悩む女性の皆様！」と、地域と悩みで見る人を絞っている。</li><li>通常価格と初回価格を並べた文面。いつもの17倍。</li></ul>
+  <div class="tags"><span class="chip warn">宣伝型の可能性</span><span class="tag">ビフォーアフター</span><span class="tag">初回価格</span><a href="https://www.instagram.com/reel/DbMW4ipzA-j/" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article><article class="reel ">
+  <div class="reel-head"><h3>「自分に合う化粧品を【探している】時間がもったいない」</h3><span class="meta">@stiare_skincare · 2025年9月30日</span></div>
+  <div class="stats"><div class="stat"><span>再生</span><strong>1.5万</strong></div><div class="stat hl"><span>いつもの何倍</span><strong>18倍</strong></div><div class="stat"><span>いいね</span><strong>非表示</strong></div><div class="stat"><span>いいね率</span><strong>—</strong></div></div>
+  <ul class="why"><li>化粧品を探し続けている人の気持ちを、そのまま一言目にしている。</li><li>「35歳からの美容医療に頼らない肌づくり」と、誰向けのサロンかをすぐ後に書いている。</li><li>フォロワー221人で1.5万回、フォロワーの68倍。</li></ul>
+  <div class="tags"><span class="tag">呼びかけ</span><span class="tag">悩みの言葉</span><a href="https://www.instagram.com/reel/DPN5m3oDxu4/" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article><article class="reel ">
+  <div class="reel-head"><h3>「お肌って本当に変わるのかな？？」</h3><span class="meta">@unelimit_hana · 2026年9月6日</span></div>
+  <div class="stats"><div class="stat"><span>再生</span><strong>7,781</strong></div><div class="stat hl"><span>いつもの何倍</span><strong>13倍</strong></div><div class="stat"><span>いいね</span><strong>26</strong></div><div class="stat"><span>いいね率</span><strong>0.33%</strong></div></div>
+  <ul class="why"><li>同じグループの4アカウントでの共同投稿。</li><li>「何を試しても良くならない…」と、来店前のお客さんが思っていることから始まる。</li><li>フォロワー218人で7,781回、フォロワーの36倍。</li></ul>
+  <div class="tags"><span class="tag">共同投稿</span><span class="tag">お悩みあるある</span><a href="https://www.instagram.com/reel/Dc8YR5GTPw6/" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article><article class="reel ">
+  <div class="reel-head"><h3>「35歳過ぎたら、しっかり紫外線対策が必須」</h3><span class="meta">@smilesalon2525.shimi_care · 2024年5月31日</span></div>
+  <div class="stats"><div class="stat"><span>再生</span><strong>4,218</strong></div><div class="stat hl"><span>いつもの何倍</span><strong>20倍</strong></div><div class="stat"><span>いいね</span><strong>—</strong></div><div class="stat"><span>いいね率</span><strong>—</strong></div></div>
+  <ul class="why"><li>帽子やサングラス、夜のパックなど、具体的な紫外線対策をリストにしている。</li><li>「35歳過ぎたら」と年齢で見る人を絞っている。</li><li>いつもの約210回から4,218回へ、20倍。</li></ul>
+  <div class="tags"><span class="tag">お役立ち</span><span class="tag">年齢で呼びかけ</span><a href="https://www.instagram.com/reel/C7nvfJ4NE2v/" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
+</article></div>
 </section>
 
-<section>
-  <h2><small>PATTERNS</small>美容サロンで伸びた「型」</h2>
-  <div class="types">
-    <div class="type"><h3>お悩みあるあるで始める</h3><p>「毛先がスカスカになりそう」「ボブにしたら子供っぽくなった」など、お客さんが口にする不安をそのままテロップにする。当てはまる人が最後まで見ます。</p><p class="ex">Rewards 2.9万回 / うめつたいが 1万回</p></div>
-    <div class="type"><h3>よくある質問に、プロとして答える</h3><p>「パーマとカラー、どっちが先?」のように、答えを知りたくなる問いを最初に出し、施術の様子に答えを重ねる。</p><p class="ex">ulura hair 1.3万回(投稿2日目)</p></div>
-    <div class="type"><h3>ビフォーアフター</h3><p>眉やまつげは、変化が一目でわかるジャンル。施術前後を並べるだけで、技術が伝わります。</p><p class="ex">フリルナチュール 4.9万回</p></div>
-    <div class="type"><h3>保存したくなる「まとめ」</h3><p>人気のデザインを3つ並べて「保存して参考にしてね」と添える。予約前に見返すために保存され、長く再生されます。</p><p class="ex">syne 9万回</p></div>
-    <div class="type no"><h3>伸びない型: 仕上がりだけ</h3><p>完成した髪型の後ろ姿や、仕上がり写真だけのリール。サロンの記録にはなっても、知らない人が見る理由になりにくい。</p><p class="ex">SLOW 232回(いつもとほぼ同じ)</p></div>
-  </div>
+<section style="display:grid;gap:16px">
+  <h2><small>PATTERNS</small>美肌・スキンケアサロンで跳ねた「型」</h2>
+  <div class="types"><div class="type"><h3>本業の外の話題・ほかの人の紹介</h3><p>地域のイベントや、気になったお店・人の紹介。肌に興味がない人にも届き、サロンを知ってもらう入口になります。</p><p class="ex">kogao_kie 49.7万回</p></div><div class="type"><h3>共同投稿で、ほかの人のフォロワーを借りる</h3><p>海外のクリエイター、同じグループのサロン、お客様。相手のフォロワーにも表示されます。</p><p class="ex">キャンチョメエステ 16.1万回 / hana 7,781回</p></div><div class="type"><h3>悩みの気持ちを一言目に</h3><p>「化粧品を探す時間がもったいない」「お肌って本当に変わるの?」。来店前のお客さんの頭の中を、そのまま言葉にします。</p><p class="ex">S.Tiare 1.5万回</p></div><div class="type"><h3>年齢と季節で呼びかける</h3><p>「35歳過ぎたら」「卒園・卒業前に」。自分のことだと思える人が止まります。</p><p class="ex">スマイルサロン 4,218回 / POLA千葉 3,276回</p></div><div class="type no"><h3>宣伝型: 経過写真 + 価格 + 初回</h3><p>ニキビや毛穴の変化を見せて、価格と初回割引を並べる。数万回届いても、いいね率は低め。広告で届けた可能性が高い型です。</p><p class="ex">MK salon 9.7万回 / ラフェリシテ 3万回</p></div></div>
 </section>
 
-<section>
-  <h2><small>VS NAIL</small>ネイルサロンとの違い</h2>
-  <div class="compare">
-    <div><h3>ネイルサロン</h3><p>大きく跳ねたリールの多くが、地域名と価格を前面に出した宣伝型。いいね率もかなり低く、有料配信の可能性が高かった。</p></div>
-    <div><h3>美容サロン(髪・まつげ・眉)</h3><p>お悩み、質問への答え、ビフォーアフターなど「役に立つ内容」で跳ねたリールが多い。髪や顔は変化が大きく、悩みも言葉にしやすいため、自然に伸びる余地が大きい。</p></div>
-  </div>
+<section style="display:grid;gap:16px">
+  <h2><small>COMPARE</small>4ジャンルを並べると</h2>
+  <div class="tbl"><table class="cmp"><thead><tr><th>ジャンル</th><th>件数</th><th>フォロワー中央値</th><th>いつもの再生数</th><th>5倍以上</th><th>10倍以上</th></tr></thead><tbody><tr class=""><td>飲食の個人店</td><td class="num">48</td><td class="num">1,666</td><td class="num">2,228</td><td class="num">40%</td><td class="num">27%</td></tr><tr class=""><td>ネイルサロン</td><td class="num">61</td><td class="num">817</td><td class="num">960</td><td class="num">34%</td><td class="num">20%</td></tr><tr class="me"><td>美肌・スキンケアサロン</td><td class="num">52</td><td class="num">916</td><td class="num">728</td><td class="num">40%</td><td class="num">23%</td></tr><tr class=""><td>まつ毛・眉サロン</td><td class="num">80</td><td class="num">589</td><td class="num">1,038</td><td class="num">39%</td><td class="num">19%</td></tr></tbody></table></div>
+  <p class="caption">美肌サロンは「いつもの再生数」が4ジャンルで一番低く、1万回を超えたリールがあるサロンは9店だけでした。肌の写真は似たものが多く、知らない人が止まる理由を作るのが難しいジャンルです。</p>
 </section>
 
-<section>
+<section style="display:grid;gap:16px">
   <h2><small>NEXT STEP</small>明日から真似するなら</h2>
-  <ul class="todo">
-    <li><b>① お客さんによく言われる不安を、3つ書き出す</b>カウンセリングで聞く「〜が心配」「〜になりがち」が、そのままテロップのネタになります。</li>
-    <li><b>② 1本目は「〇〇のお悩みあるある」から始める</b>チェックリスト形式にして、「一つでも当てはまったらご相談ください」で締めます。</li>
-    <li><b>③ 施術前の写真を撮らせてもらう</b>ビフォーアフターは一番説明がいらない投稿です。お客さんの許可を取り、顔を隠す工夫もしておきます。</li>
-    <li><b>④ 仕上がりだけの投稿には、悩みの一言を足す</b>「くせ毛を生かしてスタイリングを楽に」など、変化の理由を1枚目に書きます。</li>
-  </ul>
+  <ul class="todo"><li><b>① お客さんがカウンセリングで言う一言を、3つ書き出す</b>「何を試してもダメだった」「化粧品選びに疲れた」。その言葉を、そのまま1枚目のテロップにします。</li><li><b>② 年齢か季節で、見る人を絞る</b>「35歳から」「卒業式の前に」「夏の前に」。全員に向けた投稿より、止まる人が増えます。</li><li><b>③ 共同投稿を1本試す</b>同じ地域の別のサロン、常連のお客様、地元の発信者。相手のフォロワーに届くのが一番の近道です。</li><li><b>④ 経過写真を出すときは、お客様の許可と、言いすぎない表現を</b>肌の変化は強い内容ですが、効果の言い方には気をつけます。広告に乗せるなら、価格と予約方法をはっきり書きます。</li></ul>
 </section>
 
-<section>
+<section style="display:grid;gap:16px">
   <h2><small>METHOD</small>調べ方と、わかっていないこと</h2>
-  <ul class="method">
-    <li>Instagramの検索(マンツーマン美容室、プライベートサロン 美容室、まつパ、アイブロウ サロン、エステ 個人サロンなど)から候補を選び、Chromeでプロフィールを開いて再生数を読み取りました。全国から無作為に選んだわけではないので、偏りがあります。</li>
-    <li>syne(原宿)とフリルナチュール(フォロワー3万人)は、スタッフが複数いる小規模チェーンに近いサロンです。</li>
-    <li>いいね数を非表示にしている投稿が多く、いいね率はほとんど取れていません。<b>広告として配信されたかどうかも、画面からはわかりません。</b></li>
-    <li>投稿日は、リールのIDから計算した日付です。</li>
-  </ul>
+  <ul class="method"><li>美肌・スキンケアを中心にした個人サロン52店(フェイシャル、毛穴、ニキビ、ハーブピーリング、韓国肌管理、美容鍼、小顔など)。痩身だけ、ヒップだけのサロン、撮影業者などは外しました。前回の「美容サロン編」(髪・まつげ・眉)から、テーマを美肌・スキンケアに変えています。</li><li>Instagramの検索から候補を集め、Chromeでプロフィールのリール一覧を開いて、直近12〜15本の再生数を読み取りました。全国から無作為に選んだわけではないので、検索に出やすいアカウントに偏っています。</li><li>リールが6本未満のアカウント、フォロワー5万人以上のアカウント、プロフィールにブロガー・講師・スクール・コンサル・株式会社などとあるアカウント、お店やサロンではないアカウントは外しました。</li><li><b>広告として配信されたかどうかは、画面からはわかりません。</b>「宣伝型」と書いているのは、キャプションの文面(地名・価格・初回割引・オープン告知)と、いいね率の低さ(おおむね0.3%未満)からの推測です。</li><li>いいね数を非表示にしている投稿も多く、その場合はいいね率を出していません。画面から読み取った数字のため、多少ずれている可能性があります。</li><li>投稿日はリールのIDから計算した日付です。調べている途中でInstagramの表示制限がかかり、一部のアカウントは読み取れませんでした。</li></ul>
 </section>
 
 </div>
-
-<script>
-const accts=[
-  {n:"Rewards hiroki",id:"hi__ro__7__",area:"東京・成城学園前",f:433,med:2368,top:29000,note:'<span class="chip ok">お悩みあるある</span>'},
-  {n:"フリルナチュール",id:"frillnature",area:"福岡ほか",f:30000,med:4003,top:49000,note:'<span class="chip ok">ビフォーアフター</span> 複数店舗'},
-  {n:"うめつたいが",id:"i.am.taiga.u",area:"東京・池袋",f:8535,med:2214,top:10000,note:'<span class="chip ok">お悩みあるある</span>'},
-  {n:"ulura hair",id:"ulura_hair_yoko",area:"神奈川・綱島",f:1819,med:4701,top:13000,note:'<span class="chip ok">質問に答える</span>'},
-  {n:"syne",id:"syne_eyelash",area:"東京・原宿",f:3840,med:39500,top:90000,note:'<span class="chip ok">デザインまとめ</span> いつもが高い'},
-  {n:"saseyuka",id:"saseyuka.mokusu",area:"千葉・八街",f:1004,med:756,top:1986,note:'<span class="chip flat">小さな跳ね</span> 交流会の動画'},
-  {n:"chiyomi",id:"chiyomi.byfleurtokyo",area:"東京・自由が丘",f:1590,med:2322,top:5247,note:'<span class="chip ok">共同投稿</span>'},
-  {n:"kaede",id:"_kaeppp",area:"佐賀",f:911,med:1636,top:2157,note:'<span class="chip flat">安定型</span> 毎回1.5千前後'},
-  {n:"SLOW",id:"slow_privatesalon",area:"滋賀・草津",f:117,med:212,top:232,note:'<span class="chip flat">大きな跳ねなし</span>'}
-];
-const reels=[
-  {cls:"",t:"「レイヤースタイルのお悩みあるある」",a:"Rewards hiroki",d:"2026年8月3日",url:"https://www.instagram.com/hi__ro__7__/reel/Dbk8HTxzsX8/",v:"2.9万",l:"非表示",lr:"—",fr:"67倍",
-   why:["モデルが手で「不安」を表すしぐさに、お悩みのテロップを重ねている。","キャプションは「毛先がスカスカになりそうで怖い」「思ったより切られそうで不安」など6つのチェックリスト。最後に「一つでも当てはまったらご相談ください」。","フォロワー433人に対して2.9万回。今回の美容サロンで一番フォロワー比が高い。"],tags:["お悩みあるある","チェックリスト"]},
-  {cls:"",t:"「ボブに切ったら、なんか子供っぽくなった」",a:"うめつたいが",d:"2026年10月6日",url:"https://www.instagram.com/i.am.taiga.u/reel/DeJmGeCBiSI/",v:"1万",l:"非表示",lr:"—",fr:"1.2倍",
-   why:["失敗談のような一言で始まり、「それにはちゃんと原因があります」と続く。","髪を結んで見せながら「結んでも小顔効果抜群な顔まわりカット」とテロップ。","「保存してカウンセリングの際お使いください」と、保存する理由まで書いている。"],tags:["お悩みあるある","保存"]},
-  {cls:"",t:"「パーマとカラー、どっちが先?」",a:"ulura hair",d:"2026年11月8日",url:"https://www.instagram.com/ulura_hair_yoko/reel/DfeGhXLC19L/",v:"1.3万",l:"非表示",lr:"—",fr:"7.1倍",
-   why:["お客さんがよく迷う質問をそのまま1枚目に。答えは「先にパーマ、その約1週間後以降にカラー」。","施術中の様子に、答えのテロップを順番に重ねている。","投稿2日目で1.3万回。このサロンで一番の再生数になっている。"],tags:["質問に答える","施術の様子"]},
-  {cls:"",t:"高校卒業前に、眉とまつげのビフォーアフター",a:"フリルナチュール",d:"2024年3月13日",url:"https://www.instagram.com/frillnature/reel/C4c0YoWPX1S/",v:"4.9万",l:"非表示",lr:"—",fr:"1.6倍",
-   why:["施術の前後を並べて、変化を一目で見せている。","キャプションは「お悩み」「デザイン・ご提案」の順に、お客さんの状況と提案内容を書いたカルテのような形。","2年以上前の投稿だが、一覧の上位に固定され、いまも見られ続けている。"],tags:["ビフォーアフター","カルテ型"]},
-  {cls:"",t:"「大人気マツエクデザインまとめ」",a:"syne",d:"2026年5月24日",url:"https://www.instagram.com/syne_eyelash/reel/DYtGj2RydVt/",v:"9万",l:"非表示",lr:"—",fr:"23倍",
-   why:["盛れるデザインを3つまとめ、「デザインに悩んでる方保存して参考にしてみてください」と添えている。","音源はIVEの流行り曲。","このサロンは毎回数万回届いていて、スタッフのアカウントもキャプションに並べている。なお、求人のリールも7.5万回あるが、いいねがかなり少なく、宣伝の可能性がある。"],tags:["デザインまとめ","保存","流行りの曲"]},
-  {cls:"",t:"「この9枚の私の共通点わかりますか?」",a:"chiyomi",d:"2026年1月14日",url:"https://www.instagram.com/chiyomi.byfleurtokyo/reel/DTfYYRUAVyZ/",v:"5,247",l:"50",lr:"1.0%",fr:"3.3倍",
-   why:["他の2アカウントとの共同投稿。セルフホワイトニングの体験レポ。","9枚の写真を並べて「共通点わかりますか?」と問いかける、クイズ形式の始まり方。","投稿には「AIコンテンツ」のラベルが付いている。"],tags:["共同投稿","クイズ"]}
-];
-const special=null;
-const flat={cls:"flat",t:"推しのアーティストに寄せた、red orange のカラー",a:"SLOW",d:"2026年11月3日",url:"https://www.instagram.com/slow_privatesalon/reel/DfRI5XVPghZ/",v:"232",l:"—",lr:"—",fr:"2.0倍",
-   why:["カラーとパーマの仕上がりの後ろ姿を映したリール。","「推しのアーティストの髪色に近づくように」という良いエピソードはキャプションの中にあり、動画の1枚目には出ていない。","いつもの再生数は約210回。「推しの髪色にしたい人へ」と1枚目に書くだけで、止まる人は増えるはず。"],tags:[]};
-const fmtN=v=>v>=10000?(Math.round(v/1000)/10)+'万':v.toLocaleString('ja-JP');
-document.getElementById('acct-rows').innerHTML=accts.map(a=>{
-  const m=a.top/a.med, fr=a.top/a.f;
-  const r=v=>v>=10?Math.round(v):Math.round(v*10)/10;
-  return `<tr><td>${a.n}<br><span class="acct">@${a.id} · ${a.area}</span></td><td class="num">${fmtN(a.f)}</td><td class="num">約${fmtN(a.med)}</td><td class="num">${fmtN(a.top)}</td><td class="num"><b>${r(m)}倍</b></td><td class="num">${r(fr)}倍</td><td class="note">${a.note}</td></tr>`}).join('');
-
-(function(){
-  const svg=document.getElementById('mult'), ns='http://www.w3.org/2000/svg';
-  const data=accts.map(a=>({n:a.n,m:a.top/a.med,id:a.id})).sort((a,b)=>b.m-a.m);
-  const L=170,R=600,T=20,rowH=34,hi=Math.log10(200);
-  const x=v=>L+Math.log10(v)/hi*(R-L);
-  const el=(t,at,txt)=>{const e=document.createElementNS(ns,t);for(const k in at)e.setAttribute(k,at[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
-  const H=T+data.length*rowH+30; svg.setAttribute('viewBox',`0 0 640 ${H}`);
-  [1,2,5,10,20,50,100,200].forEach(t=>{
-    el('line',{x1:x(t),x2:x(t),y1:T-6,y2:T+data.length*rowH,stroke:'var(--line)','stroke-width':t===1||t===10||t===100?1.2:.6});
-    el('text',{x:x(t),y:T+data.length*rowH+18,'text-anchor':'middle','font-size':12,fill:'var(--muted)','font-family':'Noto Sans JP, sans-serif'},t+'倍');
-  });
-  data.forEach((d,i)=>{
-    const y=T+i*rowH;
-    const col=d.id==='udonya_jin'?'var(--warn)':(d.m>=5?'var(--ai)':'var(--muted)');
-    el('text',{x:L-10,y:y+rowH/2+4,'text-anchor':'end','font-size':13.5,fill:'var(--ink)'},d.n);
-    el('rect',{x:L,y:y+7,width:Math.max(2,x(d.m)-L),height:rowH-14,rx:3,fill:col,opacity:d.id==='udonya_jin'?.6:.9});
-    const lbl=(d.m>=10?Math.round(d.m):d.m.toFixed(1))+'倍';
-    const inside=x(d.m)>R-40;
-    el('text',{x:inside?x(d.m)-6:x(d.m)+6,y:y+rowH/2+4,'text-anchor':inside?'end':'start','font-size':13,fill:inside?'var(--surface)':'var(--ink)','font-family':'Noto Sans JP, sans-serif'},lbl);
-  });
-})();
-
-const stat=(k,label,val,hl)=>`<div class="stat${hl?' hl':''}"><span>${label}</span><strong>${val}</strong></div>`;
-const card=r=>`<article class="reel ${r.cls}">
-  <div class="reel-head"><h3>${r.t}</h3><span class="meta">${r.a} · ${r.d}</span></div>
-  <div class="stats">${stat('v','再生',r.v)}${stat('fr','フォロワー比',r.fr,true)}${stat('l','いいね',r.l)}${stat('lr','いいね率',r.lr)}</div>
-  <ul class="why">${r.why.map(w=>`<li>${w}</li>`).join('')}</ul>
-  <div class="tags">${r.cls==='special'?'<span class="chip warn">再現できない例</span>':r.cls==='flat'?'<span class="chip flat">伸びない例</span>':r.tags.map(t=>`<span class="tag">${t}</span>`).join('')}<a href="${r.url}" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px">投稿を見る</a></div>
-</article>`;
-document.getElementById('reels').innerHTML=reels.map(card).join('')+[special,flat].filter(Boolean).map(card).join('');
-</script>
